@@ -14,10 +14,19 @@
   become: false
   tags: ['always']
 
-- name: install django python dependencies
-  pip: requirements={{ project_path }}/{{ django_requirements_file }}  executable={{ venv_path }}/bin/pip
+- name: ensure poetry is installed
+  command: "pip3 install -U poetry"
+  become: true
+  tags: ["configure"]
+
+- name: install python dependencies
+  shell: "poetry install --no-dev"
+  args:
+    chdir: "{{ project_path }}"
   become: false
-  tags: ['deploy']
+  tags: ["deploy"]
+  environment:
+    VIRTUAL_ENV: "{{ venv_path }}"
 
 - name: copy env configuration
   template: src=env.env.j2 dest={{ project_path }}/.env force=no

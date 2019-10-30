@@ -3,9 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## [2.x]
 
-- Remove CircleCI support.
-- Remove Fabric Support.
-- Remove Heroku support.
+- Start using Poetry for dependency management. ([@karambir])
+- Remove CircleCI support. ([@karambir])
+- Remove Fabric Support. ([@karambir])
+- Remove Heroku support. ([@karambir])
 - vendor media type for accept headers. ([@tucosaurus]) 
 - Add black in pre-commit and also formatted exiting code as per black. ([@theskumar])
 - Upgrade to run on Python 3.7 ([@theskumar])
@@ -146,3 +147,4 @@ All notable changes to this project will be documented in this file.
 [@theskumar]: https://github.com/theskumar
 [@CuriousLearner]: https://github.com/CuriousLearner
 [@tucosaurus]: https://github.com/tucosaurus
+[@karambir]: https://github.com/karambir

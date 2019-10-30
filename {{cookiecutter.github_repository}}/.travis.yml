@@ -24,6 +24,7 @@ cache:
   pip: true
   directories:
   - node_modules  # NPM packages
+  - .venv  # poetry virtualenv
 
 services:
   - docker
@@ -52,16 +53,19 @@ before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
 
 install:
-  - pip install -r requirements/development.txt
+  - pip install poetry
   {%- if cookiecutter.webpack.lower() == 'y' %}
   - npm install
   {%- endif %}
+  - poetry config settings.virtualenvs.in-project true
+  - poetry install -vv -E ansible
+  - poetry run python -V
 
 script:
-- flake8
+- poetry run flake8
 {% if cookiecutter.webpack.lower() == 'y' %}- npm run build{% endif %}
-- pytest --cov -v --tb=native
-{% if cookiecutter.add_ansible.lower() == 'y' %}- ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
+- poetry run pytest --cov -v --tb=native
+{% if cookiecutter.add_ansible.lower() == 'y' %}- poetry run ansible-playbook -i provisioner/hosts provisioner/site.yml --syntax-check{% endif %}
 
 notifications:
   email:

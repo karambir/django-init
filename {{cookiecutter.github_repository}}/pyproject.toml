@@ -1,0 +1,156 @@
+# Isort configuration
+# We also have isort config in setup.cfg for now
+[tool.isort]
+line_length = 88
+known_first_party = "{{ cookiecutter.main_module }}"
+multi_line_output = 3
+include_trailing_comma = true
+default_section = "THIRDPARTY"
+import_heading_stdlib = "Standard Library"
+import_heading_firstparty = "{{ cookiecutter.project_name }} Stuff"
+import_heading_thirdparty = "Third Party Modules"
+
+
+[tool.black]
+target_version = ['py36', 'py37', 'py38']
+include = '\.pyi?$'
+exclude = '''
+/(\.git/
+  |\.vscode
+  |\.staticfiles
+  |\.eggs
+  |\.hg
+  |__pycache__
+  |\.cache
+  |\.ipynb_checkpoints
+  |\.mypy_cache
+  |\.pytest_cache
+  |\.venv
+  |venv
+  |node_modules
+  |_build
+  |buck-out
+  |build
+  |dist
+  |media
+  |provisioner
+  |docs
+)/
+'''
+
+# Poetry configuration
+[tool.poetry]
+name = "{{ cookiecutter.main_module }}"
+version = "{{ cookiecutter.version }}"
+description = "{{ cookiecutter.project_description }}"
+readme = "README.md"
+authors = [
+  "{{ cookiecutter.project_name }} <support@{{ cookiecutter.main_module }}.com>",
+]
+homepage = "https://{{ cookiecutter.main_module }}.com"
+
+
+[tool.poetry.dependencies]
+# Core
+python = "~3.7"
+Django = "~2.2"
+uWSGI = "^2.0"
+
+# Configuration
+argon2-cffi = "^19.1"
+django-environ = "^0.4"
+python-dotenv = "^0.10"
+{%- if cookiecutter.add_django_cors_headers.lower() == 'y' %}
+django-cors-headers = "^2.4"
+{%- endif %}
+
+# Staticfiles
+{% if cookiecutter.enable_whitenoise.lower() == 'y' -%}
+whitenoise = "^4.1"
+{%- endif %}
+django-storages = "^1.7"
+boto3 = "==1.9.165"
+django-uuid-upload-path = "^1.0"
+
+# Extensions
+pytz = "=2019.1"
+Pillow = "^5.4"
+hiredis = "^1.0"
+requests = "^2"
+django-log-request-id = "^1.3"
+django-redis = "^4.10"
+{%- if cookiecutter.add_celery.lower() == "y" %}
+# Async
+celery = {version = "~4.2", extras = ["redis"]}
+django-celery-results = "^1.0"
+{%- endif %}
+
+# Models
+psycopg2 = "~2.8"
+django-extensions = "^2.1"
+django-versatileimagefield = "^1.10"
+
+# Rest
+coreapi = "^2.3"
+djangorestframework = "~3.9"
+django-rest-swagger = "^2.2"
+
+{% if cookiecutter.use_sentry_for_error_reporting == "y" -%}
+# Error/Metrics Reporting
+raven = "^6.10"
+{%- endif %}
+django-sites = "^0.10.0"
+ipython = "^7.7"
+{%- if cookiecutter.webpack.lower() == 'y' %}
+# WEBPACK
+django-webpack-loader = "^0.6.0"
+{%- endif %}
+{% if cookiecutter.newrelic == 'y' %}
+# Logging
+newrelic = "^4.20"
+{% endif %}
+# Auth
+PyJWT = "~1.7"
+django-mail-templated = "~2.6"
+{%- if cookiecutter.add_django_auth_wall.lower() == 'y' %}
+django-auth-wall = "~0.2"
+{%- endif %}
+
+# Poetry extras
+{% if cookiecutter.add_ansible.lower() == 'y' %}
+ansible = { version = "^2.7", optional = true }
+{%- endif %}
+
+
+[tool.poetry.dev-dependencies]
+# Documentation
+mkdocs = "^1.0"
+bumpversion = "^0.5"
+
+# Linting
+isort = {version = "=4.3.4", extras = ["pyproject"]}
+flake8 = "^3.7"
+
+# Debugging
+django-debug-toolbar = "^1.11"
+ipdb = "^0.12"
+# Testing
+pytest-django = "^3.4"
+pytest-pythonpath = "^0.7"
+pytest-cov = "^2.6"
+pytest-mock = "^1.10"
+django-dynamic-fixture = "^2.0"
+black = {version = "^19.3-alpha.0", allows-prereleases = true}
+{%- if cookiecutter.add_pre_commit.lower() == 'y' %}
+pre-commit = "~1.17"
+{%- endif %}
+
+{% if cookiecutter.add_ansible.lower() == 'y' %}
+[tool.poetry.extras]
+ansible = ["ansible"]
+{%- endif %}
+
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

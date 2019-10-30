@@ -15,11 +15,12 @@ base_ubuntu:
       - htop
       - curl
       - python-dev
+      - python-setuptools
+      - python3-virtualenv
+      - python3-pip
       - python3.7
       - python3.7-dev
-      - python-setuptools
-      - python-virtualenv
-      - python3-pip
+      - python3.7-venv
       - sysstat
       - vim
       - fail2ban
