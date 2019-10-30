@@ -1,23 +1,20 @@
 {% raw %}---
-- name: Add an Apt signing key to validate packages from PostgreSQL Repo
-  apt_key:
-    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
-    state: present
-
-- name: Add to PostgreSQL.list
-  apt_repository:
-    repo: deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main
-    state: present
-
-- name: Install postgresql packages
+- name: install postgres packages for Ubuntu
   apt:
-    pkg: ['postgresql-11', 'postgresql-contrib', 'python-psycopg2']
+    name:
+      [
+        "postgresql-{{ postgresql_version }}",
+        "postgresql-contrib-{{ postgresql_version }}",
+        "python3-psycopg2",
+      ]
     state: present
+    cache_valid_time: 300
 
-- name: Install postgis packages
+- name: install postgis packages for Ubuntu
   apt:
-    pkg: "postgis-2.5"
+    name: "postgresql-{{ postgresql_version }}-postgis-{{ postgis_version }}"
     state: present
+    cache_valid_time: 300
   when: pg_gis
 
 - name: setup database

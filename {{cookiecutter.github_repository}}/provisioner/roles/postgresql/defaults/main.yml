@@ -4,3 +4,4 @@ pg_gis: False
 pg_db: '{% raw %}{{ project_namespace }}{% endraw %}'
 pg_user: dev
 pg_password: password
+postgis_version: 2.5

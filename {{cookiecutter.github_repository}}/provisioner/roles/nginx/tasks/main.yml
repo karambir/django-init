@@ -5,7 +5,10 @@
     update_cache: yes
 
 - name: install NGINX Server.
-  apt: pkg=nginx-full state=present
+  apt:
+    name: nginx-full
+    state: present
+    cache_valid_time: 300
 
 - name: make sure ssl directory exists
   file: path={{ ssl_cert_dir }} state=directory
@@ -18,16 +21,6 @@
 
 - import_tasks: letsencrypt.yml
   when: vm == 0 and use_letsencrypt and letsencrypt_dir.stat.exists == false
-
-# running cron job each monday
-- name: add letsencrypt renew cron
-  cron:
-   name: "Renew all certificates"
-   minute: "0"
-   hour: "2"
-   weekday: "1"
-   job: 'certbot renew --non-interactive --webroot -w {{ letsencrypt_challange_root }} --renew-hook "service nginx reload"'
-  when: vm == 0 and use_letsencrypt
 
 - name: check ssl/nginx.crt exists
   stat: path={{ ssl_certificate }}

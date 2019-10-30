@@ -35,11 +35,6 @@
     repo: 'ppa:deadsnakes/ppa'
     update_cache: yes
 
-- name: update apt cache
-  shell: apt update
-  become: yes
-  register: apt_updated
-
 - name: ensure a default bashrc and inputrc file
   copy: src={{ item.src }} dest=/home/{{ user }}/{{ item.dest }} owner={{ user }} group={{ user }}
   with_items:
@@ -73,10 +68,13 @@
     update_cache: yes
 
 - name: apt_get install common packages
-  apt: pkg={{base_ubuntu.common.apt_packages}} state=present
+  apt:
+    name: "{{ base_ubuntu.common.apt_packages }}"
+    state: present
+    cache_valid_time: 300
 
 - name: ensure there is a group www-data
-  group: name=www-data state=present system=yes{% endraw %}
+  group: name=www-data state=present system=yes
 
 - name: ensure there is a user www-data
-  user: name=www-data group=www-data system=yes
+  user: name=www-data group=www-data system=yes{% endraw %}
