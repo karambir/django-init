@@ -3,7 +3,8 @@ pg_hstore: False
 pg_db: "{{ project_namespace }}"
 pg_user: dev
 pg_password: password
-django_requirements_file: requirements.txt
+
+python_bin: "python{{ python_version }}"
 
 # uwsgi related variables
 uwsgi_user: www-data

@@ -4,3 +4,5 @@ project_repo_url: git@github.com:{{ cookiecutter.github_username }}/{{ cookiecut
 project_repo_remote: origin
 repo_version: master
 pg_gis: {{ 'True' if cookiecutter.postgis.lower() == 'y' else 'False' }}
+postgresql_version: 11
+python_version: 3.7

@@ -7,6 +7,8 @@ lc_all: "en_US.utf8"
 lc_ctype: "en_US.utf8"
 lc_collate: "en_US.utf8"
 
+python_version: 3.7
+
 base_ubuntu:
   common:
     apt_packages:
@@ -18,9 +20,8 @@ base_ubuntu:
       - python-setuptools
       - python3-virtualenv
       - python3-pip
-      - python3.7
-      - python3.7-dev
-      - python3.7-venv
+      - "python{{ python_version }}-dev"
+      - "python{{ python_version }}-venv"
       - sysstat
       - vim
       - fail2ban
@@ -29,7 +30,7 @@ base_ubuntu:
       - zlib1g-dev
       - libfreetype6-dev
       - liblcms2-dev
-      - postgresql-client
+      - "postgresql-client-{{ postgresql_version }}"
       - libpq-dev
       - ca-certificates
 {% endraw %}

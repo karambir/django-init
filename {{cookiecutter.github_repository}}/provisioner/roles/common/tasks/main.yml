@@ -60,6 +60,18 @@
     - { src: 'pydistutils.cfg', dest: '.pydistutils.cfg' }
     - { src: 'pip.conf', dest: '.pip/pip.conf' }
 
+- name: add postgreSQL repository apt-key
+  apt_key:
+    id: "ACCC4CF8"
+    url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+    state: present
+
+- name: add postgreSQL repository
+  apt_repository:
+    repo: "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main {{ postgresql_version }}"
+    state: present
+    update_cache: yes
+
 - name: apt_get install common packages
   apt: pkg={{base_ubuntu.common.apt_packages}} state=present
 
