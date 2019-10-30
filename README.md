@@ -6,10 +6,11 @@ Project template for django based projects, optimized for making REST API with d
 ## Features
 
 - Django 2.2.x
-- Python 3.7.x
+- Python 3.7.x(can be configured)
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Uses [Poetry](https://poetry.eustace.io/) for dependency management.
+- Provides Makefile for most useful commands.
 - Supports PostreSQL 11.0 (support of postgis-2.5 is available).
 - Ready to deploy on Ubuntu 18 LTS via [Ansible](Optional)
 - [Django Rest Framework][drf] 3.9.x.
