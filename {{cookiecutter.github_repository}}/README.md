@@ -7,7 +7,7 @@ __Version:__ {{ cookiecutter.version }}
 
 ## Getting up and running
 
-Minimum requirements: **pip, python3.7, poetry,{% if cookiecutter.webpack == 'y' %}, node, npm{% endif %}, redis & [PostgreSQL 11][install-postgres]{% if cookiecutter.postgis == 'y' %} with postgis-2.4{% endif %}**, setup is tested on Mac OSX only.
+Minimum requirements: **pyenv, poetry,{% if cookiecutter.webpack == 'y' %}, node(or nvm), npm{% endif %}, redis & [PostgreSQL 11][install-postgres]{% if cookiecutter.postgis == 'y' %} with postgis-2.4{% endif %}**, setup is tested on Mac OSX only.
 
 ```
 brew install postgres python3
