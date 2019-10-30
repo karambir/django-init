@@ -1,7 +1,7 @@
 django-init | [![Build Status](https://travis-ci.com/Fueled/django-init.svg?branch=master)](https://travis-ci.com/Fueled/django-init)
 ============
 
-Project template for django based projects, optimized for making REST API with deployment on Heroku and EC2 instances via Ansible.
+Project template for django based projects, optimized for making REST API with deployment on EC2 instances via Ansible.
 
 ## Features
 
@@ -10,12 +10,11 @@ Project template for django based projects, optimized for making REST API with d
 - Support for [black](https://pypi.org/project/black/)!
 - [12-Factor][12factor] based settings management via [django-environ], reads settings from `.env` if present.
 - Supports PostreSQL 11.0 (support of postgis-2.5 is available).
-- Ready to deploy on Heroku (optional) and Ubuntu 18 LTS via [Ansible](Optional)
+- Ready to deploy on Ubuntu 18 LTS via [Ansible](Optional)
 - [Django Rest Framework][drf] 3.9.x.
 - Uses `django_sites` instead of `django.contrib.sites`
 - Uses [mkdocs] for project documentation. Optionally, password protect the docs when deployed.
 - Uses [pytest] as test runner.
-- `travis.yml` for running isolated tests and deployments to dev/qa/prod environment on Heroku from git branches.
 - Custom `User` app, for easier extensibility.
 - Custom `Auth` app with JWT based Token Backend system with `login`, `logout` and `current_user_profile` modification views for easier extensibility.
 - Media storage using Amazon S3 (optional)

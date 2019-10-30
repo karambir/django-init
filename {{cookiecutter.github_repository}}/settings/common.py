@@ -297,9 +297,6 @@ STATIC_ROOT = str(ROOT_DIR.path(".staticfiles"))
 STATIC_URL = "/static/"
 
 # A list of locations of additional static files
-{%- if cookiecutter.webpack.lower() == "y" %}
-# Specify the static directory in fabfile also.
-{%- endif %}
 STATICFILES_DIRS = (str(APPS_DIR.path("static")),)
 
 # List of finder classes that know how to find static files in

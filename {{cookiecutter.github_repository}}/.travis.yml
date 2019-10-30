@@ -67,19 +67,3 @@ notifications:
   email:
     on_success: change  # [always|never|change]
     on_failure: always  # [always|never|change]
-
-{%- if cookiecutter.enable_heroku_deployment.lower() == 'y' %}
-deploy:
-  provider: heroku
-  buildpack: python
-  strategy: api
-  api_key:
-    # travis encrypt $(heroku auth:token) --add deploy.api_key
-    secure: <add_heroku_auth_token_here>
-  app:
-    master: {{ cookiecutter.main_module }}-dev
-    qa: {{ cookiecutter.main_module }}-qa
-    prod: {{ cookiecutter.main_module }}-prod
-  on:
-    repo: {{ cookiecutter.github_username }}/{{ cookiecutter.github_repository }}
-{% endif %}
